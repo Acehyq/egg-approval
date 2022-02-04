@@ -25,17 +25,14 @@ headers.Authorization: "10001_token"
 }
 ```
 
-approval； 
-id: 12345
-code: abcd
-
 ## 1.2 审批流详情
 **Request**
 ```
 GET /approval/detail/{id}
 headers.Authorization: "10001_token"
 ```
-**Response**
+**Response**  
+```
 {
     code: 0,
     data:{
@@ -61,7 +58,7 @@ headers.Authorization: "10001_token"
         "status": 0
     }
 }
-
+```
 ## 1.3 审批流审批
 action: 1通过, 2驳回  
 **Request**
