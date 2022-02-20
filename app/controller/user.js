@@ -3,20 +3,31 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
-  /*
-  async index() {
-    const { ctx } = this;
-    ctx.logger.info("1234");
-    ctx.body = 'hi, egg';
+  constructor(ctx) {
+    super(ctx);
+    this.service = ctx.service;
+    this.reqBody = ctx.request.body;
+    this.extLogger = ctx.extLogger;
   }
-   */
 
   async login() {
     const { ctx } = this;
 
-    ctx.logger.info("UserController login.");
+    ctx.extLogger.info("UserController login.");
 
-    ctx.setSuccessResBody("OK");
+    const token = await this.service.user.login(this.reqBody);
+
+    ctx.setSuccessResBody(token);
+  }
+
+  async register() {
+    const { ctx } = this;
+
+    ctx.logger.info("UserController register.");
+
+    const res = await this.service.user.register(this.reqBody);
+
+    ctx.setSuccessResBody();
   }
 }
 

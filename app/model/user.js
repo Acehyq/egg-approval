@@ -2,16 +2,8 @@ module.exports = app => {
 
     const mongoose = app.mongoose;
     const Types = mongoose.Types;
-
-    /*
-    export class UserInfo {
-  @Prop()
-  id: Types.ObjectId; // mongo id
-  @Prop()
-  name: string;       // 姓名
-  @Prop()
-  code: string;       // 员工id
-     */
+    const Schema = mongoose.Schema;
+    const conn = app.mongooseDB.get('egg_approval');
 
     const UserInfo = {
         id: Types.ObjectId,
@@ -19,7 +11,7 @@ module.exports = app => {
         code: String,
     };
 
-    const User = {
+    const User = new Schema({
         name: String,           // 姓名
         department: String,     // 部门
         code: String,           // 员工编号
@@ -28,5 +20,9 @@ module.exports = app => {
         token: String,          // token
         created_time: Date,
         updated_time: Date
-    };
+    });
+
+    const UserModel = conn.model('user', User);
+
+    return UserModel;
 }

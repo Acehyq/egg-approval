@@ -26,6 +26,21 @@ module.exports = appInfo => {
     },
   };
 
+  config.mongoose = {
+    clients: {
+      //做sharding kuser 数据库
+      egg_approval:{
+        // url: 'mongodb://kuser_350:kuser_350#KM9BhV@cdwp-shardstage01.chinacloudapp.cn:27001/kuser_350',
+        url: 'mongodb://localhost:27017/egg-approval',
+        options: {
+          useCreateIndex: true,
+          useFindAndModify: false,
+          useUnifiedTopology: true,
+        }
+      }
+    },
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
