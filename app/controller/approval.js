@@ -14,11 +14,10 @@ class ApprovalController extends Controller {
   }
 
   async create() {
-    // this.extLogger.info(`ApprovalController create`);
+    this.extLogger.info(`ApprovalController create`);
 
-    // const res = await this.service.approval.create(this.reqBody);
-    // return res;
-    return 123;
+    const res = await this.service.approval.create(this.reqBody);
+    return res;
   }
 }
 
