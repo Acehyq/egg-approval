@@ -20,6 +20,9 @@ module.exports = app => {
   );
 
 
+  router.put('/user',
+    user.register
+  );
   /*
   router.post('/hw/api/waybill_creation',
     paramValidator('WAYBILL_CREATION'),
