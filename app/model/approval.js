@@ -14,6 +14,7 @@ module.exports = app => {
   };
 
   const ApprovalSchema = new Schema({
+    code: String,
     "title": String,
     "type": Number,
     "content": String,

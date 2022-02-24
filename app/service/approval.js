@@ -20,6 +20,7 @@ class ApprovalService extends Service {
     const { title, type, content, money, useOfMoney } = doc;
 
     const now = new Date();
+    const ts = new Date().getTime();
 
     const approverUserId = await this.service.relation.getApprover(this.ctx.user.id);
     const approverUser = await this.model.User.findOne({
@@ -32,6 +33,7 @@ class ApprovalService extends Service {
     };
 
     const approvalDoc = {};
+    approvalDoc.code = "HYQ" + ts;
     approvalDoc.title = title;
     approvalDoc.type = type;
     approvalDoc.content = content;
