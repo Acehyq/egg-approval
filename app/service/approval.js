@@ -48,6 +48,13 @@ class ApprovalService extends Service {
 
     const res = await this.model.Approval.create(approvalDoc);
 
+    await this.model.ApprovalLog.create({
+      code: approvalDoc.code,
+      title: approvalDoc.title,
+      type: approvalDoc.type,
+      action: 0     // 创建
+    });
+
     return res;
   }
 
