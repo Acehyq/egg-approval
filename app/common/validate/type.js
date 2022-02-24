@@ -2,7 +2,7 @@
 
 
 const { Err } = require('../constant');
-const { CnbmError } = Err;
+const { MyError } = Err;
 
 
 exports.isError = function(err) {
@@ -25,5 +25,5 @@ exports.isNegativeNumber = function(number) {
 
 
 exports.isMyError = function(err) {
-  return (err instanceof CnbmError);
+  return (err instanceof MyError);
 };

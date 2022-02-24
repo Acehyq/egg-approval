@@ -8,10 +8,23 @@ module.exports = app => {
   const { approval, user } = controller;
   const { auth } = middleware;
 
-  // middleware.authorization,
-  router.put('/approval',
+  router.put('/approval/apply',
     auth(),
     approval.create
-    // user.login
+  );
+
+  router.get('/approval/list',
+    auth(),
+    approval.getApplyList
+  );
+
+  router.get('/approval/detail/:id',
+    auth(),
+    approval.getApprovalDetail
+  );
+
+  router.get('/approval/approve/list',
+    auth(),
+    approval.getApproveList
   );
 }

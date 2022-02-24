@@ -42,8 +42,8 @@ module.exports = {
     let msg;
     const body = {};
 
-    if (Type.isDemoError(err)) { // 自定义的DemoError类型
-      this.extLogger.error(`DemoError: ${JSON.stringify(err)}`);
+    if (Type.isMyError(err)) { // 自定义的MyError类型
+      this.extLogger.error(`MyError: ${JSON.stringify(err)}`);
 
       errCode = err.toJSON().code;
       msg = err.toJSON().message;

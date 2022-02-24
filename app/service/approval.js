@@ -21,7 +21,15 @@ class ApprovalService extends Service {
 
     const now = new Date();
 
-    const approverInfo = null;
+    const approverUserId = await this.service.relation.getApprover(this.ctx.user.id);
+    const approverUser = await this.model.User.findOne({
+      _id: approverUserId
+    });
+    const approverInfo = {
+      id: approverUserId,
+      name: approverUser.name,
+      code: approverUser.code
+    };
 
     const approvalDoc = {};
     approvalDoc.title = title;
@@ -39,6 +47,46 @@ class ApprovalService extends Service {
     const res = await this.model.Approval.create(approvalDoc);
 
     return res;
+  }
+
+
+  async getApplyList(userId, page, size) {
+    this.extLogger.info(`ApprovalService.getApplyList, userId: ${userId}, page: ${page}, size: ${size}`);
+
+    const list = await this.model.Approval.find({
+      "applicant.id": userId
+    }).skip((page - 1) * size).limit(size);
+
+    return list;
+  }
+
+
+  /**
+   * 获取userId为approver的审批流
+   * @param userId 用户
+   * @param page
+   * @param size
+   * @return {Promise<void>}
+   */
+  async getApprovalList(userId, page, size) {
+    this.extLogger.info(`ApprovalService.getApprovalList, userId: ${userId}, page: ${page}, size: ${size}`);
+
+    const approvalList = await this.model.Approval.find({
+      "approver.id": userId
+    }).skip((page - 1) * size).limit(size);
+
+    return approvalList;
+  }
+
+
+  async detail(approvalId) {
+    this.extLogger.info(`ApprovalService.detail, approvalId: ${approvalId}`);
+
+    const approval = await this.model.Approval.findOne({
+      _id: approvalId
+    });
+
+    return approval;
   }
 }
 
