@@ -14,5 +14,16 @@ class MoneyService extends Service {
     this.model = ctx.model;
   }
 
+  async create(sum) {
+    const moneyDoc = { sum };
+    await this.model.Money.create(moneyDoc);
+  }
 
+  async detail() {
+    const money = await this.model.Money.findOne();
+    return money.sum;
+  }
 }
+
+
+module.exports = MoneyService;
