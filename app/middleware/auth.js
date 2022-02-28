@@ -13,6 +13,7 @@ module.exports = config => {
       id: user._id,
       name: user.name,
       code: user.code,
+      position: user.position
     };
 
     ctx.user = userInfo;

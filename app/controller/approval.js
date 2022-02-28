@@ -60,6 +60,17 @@ class ApprovalController extends Controller {
 
     this.ctx.setSuccessResBody(approval);
   }
+
+  async approve() {
+    this.extLogger.info(`ApprovalController.approve`);
+
+    const id = this.ctx.params.id;
+    const { action, comment } = this.reqBody;
+
+    await this.service.approval.approve(id, action, comment);
+
+    this.ctx.setSuccessResBody();
+  }
 }
 
 module.exports = ApprovalController;
