@@ -125,11 +125,13 @@ class ApprovalService extends Service {
      action: ${action}, comment: ${comment}`);
 
     const approval = await this.model.Approval.findOne({ _id: approvalId });
+    /*
     if (approval.status !== ApprovalActionEnum.CREATE &&
       action !== ApprovalActionEnum.CREATE
     ) {
       throw new MyError("status wrong");
     }
+     */
 
     // 更新审批流状态
     const res = await this.model.Approval.findOneAndUpdate(
@@ -137,9 +139,8 @@ class ApprovalService extends Service {
       { $set: { status: action, comment: comment } }
     );
 
-    const money = await this.service.money.detail();
-    const approvalMoney = approval.money;
-    const newSum = money.sum - approvalMoney;
+    const sum = await this.service.money.sum();
+    const newSum = sum - approval.money;
 
     // 更新总金额
     await this.model.Money.findOneAndUpdate(
@@ -156,7 +157,7 @@ class ApprovalService extends Service {
     });
 
     // 创建资金使用日志
-    await this.service.moneyLog.create(approval.code, approvalMoney);
+    await this.service.moneyLog.create(approval.code, approval.money);
   }
 }
 

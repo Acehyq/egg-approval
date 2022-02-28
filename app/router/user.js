@@ -23,6 +23,11 @@ module.exports = app => {
   router.put('/user',
     user.register
   );
+
+
+  router.get('/user/position',
+    user.pos
+  )
   /*
   router.post('/hw/api/waybill_creation',
     paramValidator('WAYBILL_CREATION'),

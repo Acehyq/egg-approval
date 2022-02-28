@@ -3,14 +3,20 @@
 
 module.exports = app => {
 
-  const {router, controller, middleware, config} = app;
+  const {router, controller, middleware } = app;
 
-  const { approval, user } = controller;
+  const { approval } = controller;
   const { auth } = middleware;
 
   router.put('/approval/apply',
     auth(),
     approval.create
+  );
+
+  router.post(
+    '/approval/:id',
+    auth(),
+    approval.approve
   );
 
   router.get('/approval/list',

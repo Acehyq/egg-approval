@@ -2,7 +2,6 @@
 
 
 const Service = require('egg').Service;
-const Common = require('../common');
 
 
 class UserService extends Service {
@@ -59,6 +58,10 @@ class UserService extends Service {
     await user.save();
 
     return token;
+  }
+
+  async pos(userInfo) {
+    return userInfo.position;
   }
 }
 

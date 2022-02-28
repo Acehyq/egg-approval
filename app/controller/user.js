@@ -1,6 +1,8 @@
 'use strict';
 
+
 const Controller = require('egg').Controller;
+
 
 class UserController extends Controller {
   constructor(ctx) {
@@ -28,6 +30,14 @@ class UserController extends Controller {
     const res = await this.service.user.register(this.reqBody);
 
     ctx.setSuccessResBody();
+  }
+
+  async pos() {
+    const { ctx } = this;
+
+    const res = await this.service.user.pos(ctx.user);
+
+    ctx.setSuccessResBody(res);
   }
 }
 

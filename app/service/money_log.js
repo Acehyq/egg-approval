@@ -16,7 +16,7 @@ class MoneyLogService extends Service {
 
   async create(approvalCode, money) {
     const moneyLogDoc = {};
-    moneyLogDoc.code = approvalCode;
+    moneyLogDoc.approval_code = approvalCode;
     moneyLogDoc.money = money;
     const moneyLog = await this.model.MoneyLog.create(moneyLogDoc);
 
